@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import AppRoboexotica from './AppRoboexotica';
 import './index.css';
 
 ReactDOM.render(
-  <App />,
+  <AppRoboexotica />,
   document.getElementById('root')
 );
