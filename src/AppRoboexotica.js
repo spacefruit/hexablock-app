@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
+import './AppRoboexotica.css';
 
 import SimpleHexGrid from './SimpleHexGrid'
 import RecursiveHexGrid from './RecursiveHexGrid'
 import TwindragonGrid from './TwindragonGrid'
 import TriangleHexGrid from './TriangleHexGrid'
 import RoboexoticaGenerator from './RoboexoticaGenerator'
+
+import story from './story'
+import meSpeak from './mespeak/mespeak.js'
 
 class App extends Component {
   constructor(props) {
@@ -18,11 +21,13 @@ class App extends Component {
       minutes: 10,
       promille: 15,
       datetime: null,
-      names:    "Moritz",
-      notes:    "Note 1, Note 2",
+      names:    "",
+      notes:    "",
       seed:     1337,
       type:     'futuristic',
     }
+
+    console.log(story)
   }
 
   onMinutesChange = (evt) => {
@@ -61,6 +66,13 @@ class App extends Component {
     this.svgRef = elem
   }
 
+  getSpeechURL = (text, language) => {
+    if (!language) language = "en";
+    var x = "https://translate.google.com/translate_tts?ie=UTF-8&q=" + text +"&tl=" + language;
+    //x = "http://translate.google.com/translate_tts?ie=UTF-8&q=" + text +"&tl=en&total=1&idx=0&textlen=23&prev=input";
+    return x.replace(/ /g, "%20");
+  }
+
 
 
   render() {
@@ -78,10 +90,7 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to Roboexotica 2018</h2>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <div>
+        <div class="controls">
         minutes {minutes} <input type="range" id="myMinutes" min={1} max={100}
           value={minutes} onChange={this.onMinutesChange}
         />
@@ -110,7 +119,7 @@ class App extends Component {
           */}
           <br />
           <div ref={this.setSvgRef}>
-            <svg width="3000" height="3000">
+            <svg>
             
         {/*
             <RecursiveHexGrid rows={rows*2} cols={cols*2} lineWidth={scale} hexDiameter={depth/2} transform={t2} deltaX={1} deltaY={-0.5}/>
