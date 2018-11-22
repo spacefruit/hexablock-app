@@ -27,7 +27,7 @@ class App extends Component {
 
     let minutesItem = localStorage.getItem('minutes')
     let promilleItem = localStorage.getItem('promille')
-    let datetimeItem = localStorage.getItem('datetime')
+    // let datetimeItem = localStorage.getItem('datetime')
     let namesItem = localStorage.getItem('names')
     let notesItem = localStorage.getItem('notes')
     let seedItem = localStorage.getItem('seed')
@@ -40,7 +40,7 @@ class App extends Component {
       scale2: 0.3,*/
       minutes:  minutesItem ? parseFloat(minutesItem) : 10, // 10
       promille: promilleItem ? parseFloat(promilleItem) : 15, // 15
-      datetime: datetimeItem ? datetimeItem : {},
+      datetime: moment(),
       names:    namesItem ? namesItem : "",
       notes:    notesItem ? notesItem : "",
       seed:     seedItem  ? seedItem : 1337,
@@ -75,18 +75,16 @@ class App extends Component {
         <input type="text" id="myNames" placeholder="Names" value={names} onChange={this.onNamesChange} />
         <input type="textarea" id="notes" placeholder="Notes" value={notes} onChange={this.onNotesChange} />
         <input type="number" placeholder="Seed" value={seed} onChange={this.onSeedChange} />
-        <input type="datetime-local" value={datetime} onChange={this.onDateTimeChange} /> 
 
         <select id="myStyle">
           <option value="futuristic">Futuristic</option>
           <option value="retro">Retro</option>
           <option value="jugendstil">Jugendstil</option>
         </select>
+        
 
-        <button onClick={this.onClickExportSVG}>Print</button>
-
-
-          <RoboexoticaGenerator 
+        </div>
+        <RoboexoticaGenerator 
             minutes={minutes} 
             promille={promille}
             names={names}
@@ -94,7 +92,6 @@ class App extends Component {
             seed={seed}
             type={type}
           />
-        </div>
       </div>
     );
   }
