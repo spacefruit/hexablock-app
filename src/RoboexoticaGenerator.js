@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import './SimpleHexGrid.css';
+import moment from 'moment'
+
+import './RoboexoticaGenerator.css';
 
 class RoboexoticaGenerator extends Component {
   static propTypes = {
@@ -13,44 +15,31 @@ class RoboexoticaGenerator extends Component {
     type:     PropTypes.string
   }
 
+  formatDate = function (datum) {
+    var date = new Date(datum);
+    return date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear();
+  }
+
   render() {
-    
-    var d = 20
-    var points = ""
-    var n = 6
-    var cx = 100
-    var cy = 100
-    for (var i = 0; i < n; i++) {
-      let a = (i+0.5) * 2 * Math.PI / n
-
-      let x = cx + d * Math.cos(a)
-      let y = cy + d * Math.sin(a)
-
-      if (i != 0) {
-        points += " "
-      }
-
-      let point = x + "," + y;
-      points += point
-    }
-
     let { minutes, promille, names, notes, datetime, seed, type} = this.props
 
-
-
-
     return (
-      <div className="SimpleHexGrid-">
-        
+      <div className="cert">
+        <h1>Zertifikat</h1>
+        <div className="item">
+          Hiermit wird amtlich bestätigt, dass <b className="names">{names}</b> am
+        </div>
+        <div className="item date">{moment(datetime).format("DD.MM.YYYY")}</div>
+        <div className="item">um</div>
+        <div className="item time">{moment(datetime).format("HH:MM")}</div>
+        <p className="item">
+          mit <b>0.0‰</b> das Experiment begonnen und nach {minutes} Minuten <b>{promille}‰</b> Alkohol in der Atemluft hatte.  
+        </p>
+        <p className="item signature">
+          Wien, am {moment().format("DD.MM.YYYY")}
+        </p>
       </div>
     );
-
-      /* <polyline fill="none" stroke="#5555FF" 
-            strokeWidth={lineWidth}
-            points={points} />
-            */
-    // <circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" />
-
   }
 }
 

@@ -1,9 +1,17 @@
+body, html {
+  position: fixed;
+  width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+
 .App {
   text-align: center;
   display: flex;
   width: 100%;
-  height: 100%;
   flex-direction: column;
+  align-items: center;
 }
 
 .controls {
@@ -12,15 +20,19 @@
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.waw-logo {
   height: 80px;
 }
 
 .App-header {
-  background-color: #222;
+  background-color: #22224F;
   height: 150px;
   padding: 20px;
   color: white;
+  width: 100%;
 }
 
 .App-intro {
@@ -30,4 +42,20 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+@media only print {
+  .App-header, .controls, input {
+    display: none;
+  }
+
+  .cert {
+ 
+    width: 100vw;
+    height: 100vh;
+  }
+
+  @page {
+    size: A4;
+  }
 }
